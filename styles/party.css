@@ -26,6 +26,28 @@
 }
 .stonetop-party .pc:last-child { border-bottom: 0; }
 
+/* A row opens its sheet: a soft wash on hover says "press me" without moving anything. The wash runs out to
+   the window's edges (negative margin, matching padding) so it reads as the whole row, not a box inside it. */
+.stonetop-party .pc[data-action] {
+	position: relative;
+	cursor: pointer;
+	margin: 0 -12px;
+	padding-left: 12px;
+	padding-right: 12px;
+	border-bottom-color: transparent;
+	transition: background-color 120ms ease;
+}
+/* The rule between rows keeps its old inset while the row itself runs edge to edge. */
+.stonetop-party .pc[data-action]:not(:last-child)::after {
+	content: "";
+	position: absolute;
+	left: 12px;
+	right: 12px;
+	bottom: -1px;
+	border-bottom: 1px solid var(--party-rule);
+}
+.stonetop-party .pc[data-action]:hover { background-color: rgba(112, 128, 144, 0.12); }
+
 /* The emblem spans the row's text, from the top of the name to the foot of the playbook, so it anchors
    the row instead of floating beside the first line. The art has a white ground; multiply lets the
    parchment show through. */

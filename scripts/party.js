@@ -94,6 +94,9 @@ async function rowFor(actor) {
 		.map(w => ({ text: (w.text ?? "").trim() || "Wound", status: w.status || "problematic" }));
 
 	return {
+		id: actor.id,
+		// Only rows this person may see the sheet of are clickable (Foundry's own rule for opening a sheet).
+		canOpen: actor.testUserPermission(game.user, "LIMITED"),
 		name: actor.name,
 		playbook: playbookTitle(actor),
 		insert: insert ? await insertName(actor, insert) : null,
@@ -127,7 +130,13 @@ class PartyTracker extends HandlebarsApplicationMixin(ApplicationV2) {
 		classes: ["stonetop-themed", "stonetop-party"],
 		window: { title: "The Party", resizable: false },
 		position: { width: 346, height: "auto" },
+		actions: { openSheet: PartyTracker.#openSheet },
 	};
+
+	/** A click on a row opens that character's sheet. */
+	static #openSheet(event, target) {
+		game.actors.get(target.dataset.actorId)?.sheet?.render(true);
+	}
 
 	static PARTS = {
 		list: { template: `modules/${MODULE_ID}/templates/party.hbs` },

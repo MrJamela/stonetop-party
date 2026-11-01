@@ -1,6 +1,6 @@
 <section class="party-list">
 	{{#each rows}}
-	<div class="pc{{#if isLow}} is-low{{/if}}{{#if dead}} is-dead{{/if}}">
+	<div class="pc{{#if isLow}} is-low{{/if}}{{#if dead}} is-dead{{/if}}"{{#if canOpen}} data-action="openSheet" data-actor-id="{{id}}"{{/if}}>
 		{{#if emblem}}<img class="emblem" src="{{emblem}}" alt="">{{else}}<span class="emblem"></span>{{/if}}
 		<div class="pc-body">
 			<div class="name">{{name}}</div>

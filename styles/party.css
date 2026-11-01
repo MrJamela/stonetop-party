@@ -1,0 +1,93 @@
+/* The Party. The window's slate header and parchment page come from the Stonetop
+   system itself (the `stonetop-themed` class); this file only lays out the rows. */
+
+.stonetop-party {
+	--party-ink: var(--st-heading-ink, #2f2a24);
+	--party-ink-2: #6a625a;
+	--party-rule: var(--st-card-rule, rgba(0, 0, 0, 0.12));
+	--party-slate: var(--st-btn-primary-bg, slategrey);
+	--party-danger: var(--st-danger-ink, #a02020);
+	--party-red: var(--st-red-text, hsl(0 55% 30%));
+	font-family: var(--font-stonetop, "Libre Caslon Text", serif);
+}
+
+.stonetop-party .window-content {
+	padding: 4px 12px;
+	color: var(--party-ink);
+}
+
+.stonetop-party .pc {
+	display: grid;
+	grid-template-columns: 36px 1fr;
+	column-gap: 10px;
+	align-items: start;
+	padding: 9px 0;
+	border-bottom: 1px solid var(--party-rule);
+}
+.stonetop-party .pc:last-child { border-bottom: 0; }
+
+/* The emblem art has a white ground; multiply lets the parchment show through. */
+.stonetop-party .emblem {
+	width: 36px;
+	height: 36px;
+	margin-top: 2px;
+	border: 0;
+	mix-blend-mode: multiply;
+}
+
+.stonetop-party .line {
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: 8px;
+}
+.stonetop-party .name { font-weight: 700; font-size: 15px; }
+
+/* Armor and HP each keep a fixed column: HP has a set width so Armor never shifts. */
+.stonetop-party .vitals { display: flex; align-items: baseline; gap: 10px; flex-shrink: 0; }
+.stonetop-party .armor,
+.stonetop-party .hp { font-size: 15px; font-variant-numeric: lining-nums tabular-nums; white-space: nowrap; }
+.stonetop-party .hp { min-width: 5.4em; text-align: right; }
+.stonetop-party .hp .max { color: var(--party-ink-2); font-size: 12px; }
+.stonetop-party .label {
+	font-size: 10px;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: var(--party-ink-2);
+	margin-right: 3px;
+}
+
+.stonetop-party .bar { height: 3px; margin: 4px 0 5px; background: rgba(0, 0, 0, 0.1); border-radius: 2px; }
+.stonetop-party .bar > span { display: block; height: 100%; border-radius: 2px; background: var(--party-slate); }
+
+.stonetop-party .playbook {
+	font-family: "IM Fell English", serif;
+	font-style: italic;
+	font-size: 14px;
+	color: var(--party-ink-2);
+}
+
+/* The word sits before the dots so the dots stay in one column on the right edge. */
+.stonetop-party .load { display: flex; align-items: center; gap: 3px; font-size: 12px; flex-shrink: 0; }
+.stonetop-party .load .word { margin-right: 5px; }
+.stonetop-party .load .pip {
+	width: 7px;
+	height: 7px;
+	border: 1.5px solid currentColor;
+	border-radius: 50%;
+}
+.stonetop-party .load .pip.on { background: currentColor; }
+.stonetop-party .load.is-over { color: var(--party-red); font-weight: 700; }
+
+/* A third of max HP or less */
+.stonetop-party .pc.is-low .hp,
+.stonetop-party .pc.is-low .hp .max { color: var(--party-danger); }
+.stonetop-party .pc.is-low .bar > span { background: var(--party-danger); }
+
+/* Shown only when a debility or an open wound exists */
+.stonetop-party .harm { margin-top: 5px; font-size: 12px; line-height: 1.35; }
+.stonetop-party .debilities { color: var(--party-red); }
+.stonetop-party .wound { font-style: italic; }
+.stonetop-party .wound .status { font-style: normal; color: var(--party-ink-2); }
+
+.stonetop-party .empty { margin: 10px 0; font-style: italic; color: var(--party-ink-2); }

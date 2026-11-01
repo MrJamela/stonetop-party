@@ -1,0 +1,31 @@
+<section class="party-list">
+	{{#each rows}}
+	<div class="pc{{#if isLow}} is-low{{/if}}">
+		{{#if emblem}}<img class="emblem" src="{{emblem}}" alt="">{{else}}<span class="emblem"></span>{{/if}}
+		<div class="pc-body">
+			<div class="line">
+				<span class="name">{{name}}</span>
+				<span class="vitals">
+					<span class="armor"><span class="label">Armor</span>{{armor}}</span>
+					<span class="hp"><span class="label">HP</span>{{hp}}<span class="max"> / {{hpMax}}</span></span>
+				</span>
+			</div>
+			<div class="bar"><span style="width: {{hpPct}}%"></span></div>
+			<div class="line">
+				<span class="playbook">{{playbook}}</span>
+				<span class="load{{#if load.isOver}} is-over{{/if}}">
+					<span class="word">{{load.word}}</span>
+					{{#each load.pips}}<i class="pip{{#if this}} on{{/if}}"></i>{{/each}}
+				</span>
+			</div>
+			{{#if hasHarm}}
+			<div class="harm">
+				{{#if debilities}}<div class="debilities">{{debilities}}</div>{{/if}}
+				{{#each wounds}}<div class="wound">{{text}} <span class="status">({{status}})</span></div>{{/each}}
+			</div>
+			{{/if}}
+		</div>
+	</div>
+	{{/each}}
+	{{#if empty}}<p class="empty">No player characters yet.</p>{{/if}}
+</section>

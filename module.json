@@ -1,0 +1,13 @@
+{
+  "id": "stonetop-party",
+  "title": "Stonetop: The Party",
+  "description": "A small floating window showing each player character's name, playbook, armor, HP, load, debilities and wounds. Press P to open or close it (changeable in Configure Controls).",
+  "version": "0.1.0",
+  "authors": [{ "name": "Jaime" }],
+  "compatibility": { "minimum": "13", "verified": "14" },
+  "relationships": {
+    "systems": [{ "id": "stonetop-pwd", "type": "system" }]
+  },
+  "esmodules": ["scripts/party.js"],
+  "styles": ["styles/party.css"]
+}

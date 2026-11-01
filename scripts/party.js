@@ -31,7 +31,29 @@ function playbookTitle(actor) {
 	return name;
 }
 
+// After death a character may take an insert (Book I): Ghost, Revenant or Thrall. The sheet then shows the
+// insert's name with the old playbook struck through; the playbook comes back if the insert is removed.
+const INSERTS = ["ghost", "revenant", "thrall"];
+
+function insertSlug(actor) {
+	const slug = actor.getFlag(SYSTEM_ID, "postDeathInsert")?.slug;
+	return INSERTS.includes(slug) ? slug : null;
+}
+
+/** The insert's name as the sheet shows it ("Revenant"), asked of the system. */
+async function insertName(actor, slug) {
+	try {
+		const name = await actor.typedActor?.postDeathInsertName?.();
+		if (name) return name;
+	} catch (err) {
+		console.warn(`${MODULE_ID} | could not read the insert name for ${actor.name}`, err);
+	}
+	return slug.charAt(0).toUpperCase() + slug.slice(1);
+}
+
 function emblemFor(actor) {
+	const insert = insertSlug(actor);
+	if (insert) return `systems/${SYSTEM_ID}/assets/icons/playbooks/${insert}_icon.webp`;
 	const slug = actor.system?.playbook?.slug
 		?? actor.items?.find(i => i.type === "playbook")?.system?.slug
 		?? "";
@@ -54,6 +76,7 @@ async function rowFor(actor) {
 	const hpMax = Number(attrs.hp?.max) || 0;
 
 	const tier = await loadTier(actor);
+	const insert = insertSlug(actor);
 	const load = LOAD[tier] ?? { word: "", pips: 0 };
 
 	const debilities = Object.values(attrs.debilities?.options ?? {})
@@ -67,6 +90,7 @@ async function rowFor(actor) {
 	return {
 		name: actor.name,
 		playbook: playbookTitle(actor),
+		insert: insert ? await insertName(actor, insert) : null,
 		emblem: emblemFor(actor),
 		armor: Number(attrs.armor?.value) || 0,
 		hp,

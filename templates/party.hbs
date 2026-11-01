@@ -12,7 +12,11 @@
 			</div>
 			<div class="bar"><span style="width: {{hpPct}}%"></span></div>
 			<div class="line">
+				{{#if insert}}
+				<span class="playbook">{{insert}} <s class="was">{{playbook}}</s></span>
+				{{else}}
 				<span class="playbook">{{playbook}}</span>
+				{{/if}}
 				<span class="load{{#if load.isOver}} is-over{{/if}}">
 					<span class="word">{{load.word}}</span>
 					{{#each load.pips}}<i class="pip{{#if this}} on{{/if}}"></i>{{/each}}

@@ -52,6 +52,25 @@
 	width: 62.4px; height: 62.4px; margin: 2.85px 0 0 -2.4px;
 }
 
+/* The after-death inserts (Ghost, Revenant, Thrall) are drawn white on black. Inverting them makes dark ink
+   on white like the rest, which the multiply then lays on the parchment. Their circles sit inside the image,
+   so they scale up the same way (size = 60 × 576 / circle width). */
+.stonetop-party .emblem[src$="/ghost_icon.webp"],
+.stonetop-party .emblem[src$="/revenant_icon.webp"],
+.stonetop-party .emblem[src$="/thrall_icon.webp"] { filter: invert(1); }
+.stonetop-party .emblem[src$="/ghost_icon.webp"] {
+	width: 70.5px; height: 70.5px; margin: -0.4px 0 0 -5.3px;
+}
+.stonetop-party .emblem[src$="/revenant_icon.webp"] {
+	width: 77.5px; height: 77.5px; margin: -9.2px 0 0 -8.9px;
+}
+.stonetop-party .emblem[src$="/thrall_icon.webp"] {
+	width: 67.5px; height: 67.5px; margin: 0.7px 0 0 -3.75px;
+}
+
+/* Who they were before the insert, as the sheet shows it. */
+.stonetop-party .playbook .was { color: var(--party-ink-2); opacity: 0.75; }
+
 .stonetop-party .line {
 	display: flex;
 	align-items: baseline;

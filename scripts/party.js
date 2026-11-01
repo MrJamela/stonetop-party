@@ -91,7 +91,7 @@ class PartyTracker extends HandlebarsApplicationMixin(ApplicationV2) {
 		id: "stonetop-party",
 		classes: ["stonetop-themed", "stonetop-party"],
 		window: { title: "The Party", resizable: false },
-		position: { width: 320, height: "auto" },
+		position: { width: 346, height: "auto" },
 	};
 
 	static PARTS = {

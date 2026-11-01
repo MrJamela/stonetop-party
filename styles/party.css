@@ -18,19 +18,22 @@
 
 .stonetop-party .pc {
 	display: grid;
-	grid-template-columns: 36px 1fr;
-	column-gap: 10px;
+	grid-template-columns: 60px 1fr;
+	column-gap: 12px;
 	align-items: start;
 	padding: 9px 0;
 	border-bottom: 1px solid var(--party-rule);
 }
 .stonetop-party .pc:last-child { border-bottom: 0; }
 
-/* The emblem art has a white ground; multiply lets the parchment show through. */
+/* The emblem spans the row's text, from the top of the name to the foot of the playbook, so it anchors
+   the row instead of floating beside the first line. The art has a white ground; multiply lets the
+   parchment show through. */
 .stonetop-party .emblem {
-	width: 36px;
-	height: 36px;
-	margin-top: 2px;
+	width: 60px;
+	height: 60px;
+	margin-top: 4px;
+	object-fit: contain;
 	border: 0;
 	mix-blend-mode: multiply;
 }

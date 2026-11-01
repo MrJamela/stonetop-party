@@ -41,7 +41,10 @@
 	justify-content: space-between;
 	gap: 8px;
 }
-.stonetop-party .name { font-weight: 700; font-size: 15px; }
+/* The name always has the top line to itself, so any length reads in one sweep (the user, 2026-11-01).
+   A single word wider than the whole line still breaks rather than being cut off. */
+.stonetop-party .name { font-weight: 700; font-size: 15px; line-height: 1.25; overflow-wrap: anywhere; }
+.stonetop-party .vitals-line { justify-content: flex-end; }
 
 /* Armor and HP each keep a fixed column: HP has a set width so Armor never shifts. */
 .stonetop-party .vitals { display: flex; align-items: baseline; gap: 10px; flex-shrink: 0; }

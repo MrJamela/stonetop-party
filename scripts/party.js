@@ -20,7 +20,8 @@ const LOAD = {
 function partyCharacters() {
 	const chars = (game.actors?.contents ?? []).filter(a => a.type === "character");
 	const owned = chars.filter(a => a.hasPlayerOwner);
-	return owned.length ? owned : chars;
+	// A to Z, so a newly made character doesn't sit at the bottom until the next reload.
+	return (owned.length ? owned : chars).sort((a, b) => a.name.localeCompare(b.name));
 }
 
 /** The playbook as the sheet names it: a Would-Be Hero who has crossed off "Would-be" reads "The Hero". */

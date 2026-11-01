@@ -32,10 +32,24 @@
 .stonetop-party .emblem {
 	width: 60px;
 	height: 60px;
+	max-width: none; /* Foundry caps images at their column; the bigger art below must spill past it */
 	margin-top: 4px;
 	object-fit: contain;
 	border: 0;
 	mix-blend-mode: multiply;
+}
+
+/* Every emblem's circle is drawn 576px wide. Three images are bigger to fit what breaks out of the circle
+   (the Hero's flame, the Blessed's leaves, the Ranger's arrow), so they scale up until their circle matches
+   the others and the extra spills past it. Size = 60 × image / 576; offsets move the circle into the slot. */
+.stonetop-party .emblem[src$="the_would_be_hero_icon.webp"] {
+	width: 70.3px; height: 70.3px; margin: -6.3px 0 0 -5.1px;
+}
+.stonetop-party .emblem[src$="the_blessed_icon.webp"] {
+	width: 63.75px; height: 63.75px; margin: 0.25px 0 0 -1.9px;
+}
+.stonetop-party .emblem[src$="the_ranger_icon.webp"] {
+	width: 62.4px; height: 62.4px; margin: 2.85px 0 0 -2.4px;
 }
 
 .stonetop-party .line {

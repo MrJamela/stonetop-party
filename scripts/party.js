@@ -40,6 +40,11 @@ function insertSlug(actor) {
 	return INSERTS.includes(slug) ? slug : null;
 }
 
+/** Stepped through the Last Door with no insert: the sheet's "Dead" tag. */
+function isDead(actor) {
+	return !insertSlug(actor) && actor.getFlag(SYSTEM_ID, "deathsDoor") === "dead";
+}
+
 /** The insert's name as the sheet shows it ("Revenant"), asked of the system. */
 async function insertName(actor, slug) {
 	try {
@@ -77,6 +82,7 @@ async function rowFor(actor) {
 
 	const tier = await loadTier(actor);
 	const insert = insertSlug(actor);
+	const dead = isDead(actor);
 	const load = LOAD[tier] ?? { word: "", pips: 0 };
 
 	const debilities = Object.values(attrs.debilities?.options ?? {})
@@ -96,7 +102,12 @@ async function rowFor(actor) {
 		hp,
 		hpMax,
 		hpPct: hpMax > 0 ? Math.max(0, Math.min(100, (hp / hpMax) * 100)) : 0,
-		isLow: hpMax > 0 && hp <= hpMax / 3,
+		// No low-HP red for the dead: it calls for help there is no longer any giving.
+		isLow: !dead && hpMax > 0 && hp <= hpMax / 3,
+		dead: dead ? {
+			word: game.i18n.localize("stonetop.postDeath.deadTag"),
+			hint: game.i18n.localize("stonetop.postDeath.deadTooltip"),
+		} : null,
 		load: {
 			word: load.word,
 			isOver: tier === "overloaded",

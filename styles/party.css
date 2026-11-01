@@ -68,6 +68,16 @@
 	width: 67.5px; height: 67.5px; margin: 0.7px 0 0 -3.75px;
 }
 
+/* Dead (no insert): the sheet's own Dead tag sits in the space left of Armor and HP, and the rest of the row
+   fades so the eye goes to the living first. */
+.stonetop-party .vitals-line .stonetop-dead-tag { margin: 0 auto 0 0; align-self: center; }
+.stonetop-party .pc.is-dead > .emblem,
+.stonetop-party .pc.is-dead .name,
+.stonetop-party .pc.is-dead .vitals,
+.stonetop-party .pc.is-dead .bar,
+.stonetop-party .pc.is-dead .pc-body > .line:not(.vitals-line),
+.stonetop-party .pc.is-dead .harm { opacity: 0.5; }
+
 /* Who they were before the insert, as the sheet shows it. */
 .stonetop-party .playbook .was { color: var(--party-ink-2); opacity: 0.75; }
 

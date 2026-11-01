@@ -1,10 +1,11 @@
 <section class="party-list">
 	{{#each rows}}
-	<div class="pc{{#if isLow}} is-low{{/if}}">
+	<div class="pc{{#if isLow}} is-low{{/if}}{{#if dead}} is-dead{{/if}}">
 		{{#if emblem}}<img class="emblem" src="{{emblem}}" alt="">{{else}}<span class="emblem"></span>{{/if}}
 		<div class="pc-body">
 			<div class="name">{{name}}</div>
 			<div class="line vitals-line">
+				{{#if dead}}<span class="stonetop-dead-tag" data-tooltip="{{dead.hint}}" data-tooltip-direction="UP"><i class="fas fa-skull"></i><span class="stonetop-dead-tag-text">{{dead.word}}</span></span>{{/if}}
 				<span class="vitals">
 					<span class="armor"><span class="label">Armor</span>{{armor}}</span>
 					<span class="hp"><span class="label">HP</span>{{hp}}<span class="max"> / {{hpMax}}</span></span>
